@@ -5,12 +5,6 @@ FROM centos:latest
 # https://github.com/sometheycallme
 MAINTAINER Tim Kropp <timkropp77@gmail.com>
 
-# https://github.com/sometheycallme
-MAINTAINER Tim Kropp <timkropp77@gmail.com>
-
-# Update the base image.
-# RUN yum -y update
-
 # Install dependencies.
 RUN yum -y update \
       nss-util \
@@ -27,9 +21,14 @@ RUN yum -y update \
 COPY Nessus-6.4.3-es6.x86_64.rpm /tmp/
 # run the yum install twice as workaround for rpmdb checksum error with overlayfs
 RUN (yum -y --nogpgcheck localinstall /tmp/Nessus-6.4.3-es6.x86_64.rpm || \
-    yum -y --nogpgcheck localinstall /tmp/Nessus-6.4.3-es6.x86_64.rpm) && \
-    yum clean all
+     yum -y --nogpgcheck localinstall /tmp/Nessus-6.4.3-es6.x86_64.rpm) && \
+     yum clean all
 
-# Start Nessus
-ENTRYPOINT ["/opt/nessus/sbin/nessus-service"]
-EXPOSE 8834
+
+# Copy Entrypoint
+COPY 		entrypoint.sh /
+
+EXPOSE 		8834
+VOLUME		[ "/opt/data" ]
+ENTRYPOINT 	[ "/entrypoint.sh" ]
+

@@ -1,6 +1,7 @@
 nessus-data/var
 nessus-data/etc
 nessus-data/sbin
+
 .DS_Store
 
 # Byte-compiled / optimized / DLL files
