@@ -10,6 +10,8 @@ RUN yum -y update \
       nss-util \
       bind-license \
       libssh2 \
+    && yum -y install \
+      net-tools \
     && yum clean all
 
 # Need Nessus account RPM

@@ -1,6 +1,7 @@
 nessus-data/var
 nessus-data/etc
 nessus-data/sbin
+nessus-data/mac-address.txt
 
 .DS_Store
 
